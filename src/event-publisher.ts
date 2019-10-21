@@ -15,7 +15,7 @@ export class EventPublisher {
     const eventBus = this.eventBus;
     return class extends metatype {
       publish(event: IEvent) {
-        eventBus.publish(event);
+        return eventBus.publish(event);
       }
     };
   }
@@ -23,7 +23,7 @@ export class EventPublisher {
   mergeObjectContext<T extends AggregateRoot>(object: T): T {
     const eventBus = this.eventBus;
     object.publish = (event: IEvent) => {
-      eventBus.publish(event);
+      return eventBus.publish(event);
     };
     return object;
   }
