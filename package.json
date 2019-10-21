@@ -10,7 +10,7 @@
     "prettier": "prettier src/**/*.ts --write && git status",
     "prepublish:npm": "npm run build",
     "publish:npm": "npm publish --access public",
-    "install": "build"
+    "install": "yarn run build"
   },
   "devDependencies": {
     "@nestjs/common": "6.7.2",
