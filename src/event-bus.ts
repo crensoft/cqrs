@@ -46,11 +46,13 @@ export class EventBus extends ObservableBus<IEvent>
   }
 
   publish<T extends IEvent>(event: T) {
-    this._publisher.publish(event);
+    return this._publisher.publish(event);
   }
 
   publishAll(events: IEvent[]) {
-    (events || []).forEach(event => this._publisher.publish(event));
+    const evts = [];
+    (events || []).forEach(event => { evts.push(this._publisher.publish(event)); });
+    return evts;
   }
 
   bind(handler: IEventHandler<IEvent>, name: string) {
