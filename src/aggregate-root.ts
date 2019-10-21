@@ -18,8 +18,12 @@ export abstract class AggregateRoot {
   publish(event: IEvent) {}
 
   commit() {
-    this[INTERNAL_EVENTS].forEach(event => this.publish(event));
+    const reqs: any = [];
+    this[INTERNAL_EVENTS].forEach(event => {
+      reqs.push(this.publish(event));
+    });
     this[INTERNAL_EVENTS].length = 0;
+    return Promise.all(reqs);
   }
 
   uncommit() {
